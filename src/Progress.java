@@ -13,6 +13,12 @@ public class Progress {
     // Метод возвращает массив со строками, если все прошло хорошо.
     // Либо возвращает нул, если был косяк в считывании данных.
     private static String[] getMassiveStrings() {
+        // Блок для использования ввода из файла.
+        //try {
+        //    BufferedReader bfr = new BufferedReader(new FileReader("input.txt"));
+        //} catch (FileNotFoundException e) {
+        //    throw new RuntimeException(e);
+        //}
         BufferedReader bfr = new BufferedReader(new InputStreamReader(System.in));
         try {
             // Читаем первую строку на наличие инт.

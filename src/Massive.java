@@ -4,7 +4,7 @@ import java.io.InputStreamReader;
 import java.util.*;
 
 public class Massive {
-    public static Map<String,Integer> map = new HashMap<>();
+    private static Map<String,Integer> map = new HashMap<>();
 
     public static void main(String[] args) throws IOException {
         //String indata = "[1, 345, 345, 2, 3, [5, 5], 6, 6, [7, 8, 9, [10, 11]]]";
