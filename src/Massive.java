@@ -59,6 +59,7 @@ public class Massive {
             // Начинается проверка на вхождение в мап
                 if (map.putIfAbsent(key,1)!=null) map.replace(key, ((map.get(key))+1));
             } else scn.next();
+            scn.close();
         }
     }
 

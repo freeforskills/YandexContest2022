@@ -14,17 +14,18 @@ public class Progress {
     // Либо возвращает нул, если был косяк в считывании данных.
     private static String[] getMassiveStrings() {
         // Блок для использования ввода из файла.
-        //try {
-        //    BufferedReader bfr = new BufferedReader(new FileReader("input.txt"));
-        //} catch (FileNotFoundException e) {
-        //    throw new RuntimeException(e);
-        //}
-        BufferedReader bfr = new BufferedReader(new InputStreamReader(System.in));
+        BufferedReader bfr;
+        try {
+            bfr = new BufferedReader(new FileReader("input.txt"));
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+        //BufferedReader bfr = new BufferedReader(new InputStreamReader(System.in));
         try {
             // Читаем первую строку на наличие инт.
             int numbOfProgress = Integer.parseInt(bfr.readLine());
             //Проверяем инт на условия
-            if (numbOfProgress <1 || numbOfProgress > 100) throw new NumberFormatException();
+            if (numbOfProgress <1 || numbOfProgress > 10000) throw new NumberFormatException();
             // Создаем массив стрингов длиной по количеству прогрессий
             String[] dataString = new String[numbOfProgress];
             // Запускаем цикл чтения строк
@@ -99,6 +100,7 @@ public class Progress {
                     System.out.println("Некорректные данные при считывании прогрессий. Метод getData, поверка строк.");
                     return null;
                 }
+                scn.close();
             }
             return listOfInts;
         } catch (IOException e) {
@@ -126,7 +128,7 @@ public class Progress {
             }
         }
         if (stb.length()>=1) stb.deleteCharAt(stb.length()-1);
-        return stb.toString();
+        return (stb.toString().equals("null"))? null : stb.toString();
     }
 
     private static boolean stAdd(int valueA, int valueB, int iD, Map<Integer,Integer[]> hashmap){
