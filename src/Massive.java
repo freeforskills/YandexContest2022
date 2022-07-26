@@ -1,17 +1,21 @@
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.*;
 
 public class Massive {
     public static Map<String,Integer> map = new HashMap<>();
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         //String indata = "[1, 345, 345, 2, 3, [5, 5], 6, 6, [7, 8, 9, [10, 11]]]";
         //String indata = "[[[[[[1]]]], []]]";
-        String indata = "[0, 10, 2, 5, -999999999]";
-        checkMsv(indata);
+        //String indata = "[0, 10, 2, 5, -999999999]";
+        BufferedReader bfr = new BufferedReader(new InputStreamReader(System.in));
+        checkMsv(bfr.readLine());
         System.out.println(calculateMap());
     }
 
-    public static void checkMsv(String indata){
+    private static void checkMsv(String indata){
         // Если индата пуста или меньше 3 символов - выход
     if (indata==null || indata.length()<3) return;
     StringBuilder stb = new StringBuilder(indata);
@@ -45,7 +49,7 @@ public class Massive {
         if (stb.length()>0) checkMsv("["+stb+"]");
     }
 
-    public static void checkString(String data){
+    private static void checkString(String data){
         // Запускаем сканер
         Scanner scn = new Scanner(data);
         // Если в строке есть хоть что-то, запускается проверка на инт
@@ -58,7 +62,7 @@ public class Massive {
         }
     }
 
-    public static String calculateMap(){
+    private static String calculateMap(){
         if (map.isEmpty()) return null;
         int max = Collections.max(map.values());
         StringBuilder stb = new StringBuilder();

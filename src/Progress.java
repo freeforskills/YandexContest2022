@@ -8,7 +8,6 @@ public class Progress {
         List<Integer[]> listInts = getData(dataString);
         String out = operateData(listInts);
         System.out.println(out);
-
     }
 
     // Метод возвращает массив со строками, если все прошло хорошо.
@@ -28,7 +27,7 @@ public class Progress {
                     // Начинаем парсить строки
                     String tempLine = bfr.readLine();
                     // Если строка нулл или < 1, бросаем ошибку рвем цикл.
-                    if (tempLine==null || tempLine.length()<1) throw new IOException();
+                    if (tempLine==null || tempLine.isEmpty()) throw new IOException();
                     // обавляем строку в массив стрингов
                     dataString[lines] = tempLine;
                 } catch (IOException e) {
@@ -44,7 +43,6 @@ public class Progress {
         return null;
     }
 
-
     // Метод получает массив со строками, проверяет строки на валидность и возвращает
     // лист с массивом интов, в противном случае возвращает нулл
     private static List<Integer[]> getData(String[] dataString){
@@ -57,8 +55,9 @@ public class Progress {
                 Scanner scn = new Scanner(line);
                 try {
                     // Читает строку на первый инт
-                    int numberOfAction = scn.nextInt();
                     // Тут может вывалиться исключение на не инт
+                    if (!scn.hasNext() || !scn.hasNextInt()) throw new NumberFormatException();
+                    int numberOfAction = scn.nextInt();
                     // Проверка инта 1<=numberOfAction<=3
                     if (numberOfAction < 1 || numberOfAction > 3) throw new NumberFormatException();
                     int numberOfInts = switch (numberOfAction) {
@@ -74,7 +73,7 @@ public class Progress {
                     // Начинаем наполнять массив интами.
                     for (int values = 0; values < numberOfInts; values++) {
                         // Если в строке дальше ничего нет, бросаем исключение.
-                        if (!scn.hasNext()) throw new NumberFormatException();
+                        if (!scn.hasNext() || !scn.hasNextInt()) throw new NumberFormatException();
                         int tempInt = scn.nextInt();
                         // Тут может вывалиться исключение т.к. не найдет инт
                         // Проверка значений
@@ -84,7 +83,7 @@ public class Progress {
                     // Тут на выходе получен массив с интами.
                     // Добавляем массив в лист
                     listOfInts.add(intsMsv);
-                } catch (RuntimeException e) {
+                } catch (NumberFormatException e) {
                     System.out.println("Некорректные данные при считывании прогрессий. Метод getData, поверка строк.");
                     return null;
                 }
