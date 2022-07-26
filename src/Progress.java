@@ -66,10 +66,16 @@ public class Progress {
                     int numberOfAction = scn.nextInt();
                     // Проверка инта 1<=numberOfAction<=3
                     if (numberOfAction < 1 || numberOfAction > 3) throw new NumberFormatException();
-                    int numberOfInts = switch (numberOfAction) {
-                        case 1 -> 3;
-                        case 2 -> 1;
-                        default -> 0;
+                    int numberOfInts;
+                    switch (numberOfAction) {
+                        case 1:
+                            numberOfInts = 3;
+                            break;
+                        case 2:
+                            numberOfInts = 1;
+                            break;
+                        default:
+                            numberOfInts = 0;
                     };
                     // Создаем массив для интов.
                     Integer[] intsMsv = new Integer[numberOfInts + 1];
@@ -109,9 +115,14 @@ public class Progress {
         if (listOfIntMsv==null) return null;
         for (Integer[] msv:listOfIntMsv) {
             switch (msv[0]) {
-                case 1 -> stAdd(msv[1], msv[2], msv[3], hashmap);
-                case 2 -> stDel(msv[1], hashmap);
-                case 3 -> stb.append(stGet(hashmap)).append("\n");
+                case 1:
+                    stAdd(msv[1], msv[2], msv[3], hashmap);
+                    break;
+                case 2:
+                    stDel(msv[1], hashmap);
+                    break;
+                case 3:
+                    stb.append(stGet(hashmap)).append("\n");
             }
         }
         if (stb.length()>=1) stb.deleteCharAt(stb.length()-1);
